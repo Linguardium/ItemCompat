@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "mod.linguardium.itemcompat.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [ "ShearLootMixin"
+  ],
+  "client": [
+    "SheepShearMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
