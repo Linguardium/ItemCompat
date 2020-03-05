@@ -6,15 +6,15 @@
   "name": "Item Compatibility",
   "description": "Enables custom shears to work as shears",
   "authors": [
-    "Me!"
+    "Linguardium"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/Linguardium/ItemCompat",
+    "sources": "https://github.com/Linguardium/ItemCompat"
   },
 
-  "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "license": "MIT",
+  "icon": "assets/itemcompat/icon.png",
 
   "environment": "*",
   "entrypoints": {
