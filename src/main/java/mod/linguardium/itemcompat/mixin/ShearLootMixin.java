@@ -39,15 +39,6 @@ public abstract class ShearLootMixin {
 			}
 		}
 		return;
-		/*JsonElement jEl = predicate.toJson();
-		JsonObject jsonObject = JsonHelper.asObject(jEl,"predicate");
-		if (jsonObject.has("item") && JsonHelper.getString(jsonObject, "item").equalsIgnoreCase("minecraft:shears")) {
-			jsonObject.remove("item");
-			jsonObject.addProperty("tag", "c:shears");
-
-			System.out.print(jsonObject.toString());
-			this.predicate = ItemPredicate.fromJson(jsonObject);
-		}*/
 	}
 }
 
