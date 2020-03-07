@@ -41,10 +41,8 @@ public abstract class SheepShearMixin extends AnimalEntity {
 						playerEntity.sendToolBreakStatus(hand);
 					});
 				}
-				System.out.println("Sheared");
 				info.setReturnValue(true);
 			} else {
-				System.out.println("Cannot be Sheared");
 				info.setReturnValue(super.interactMob(player,hand));
 			}
 		}else{
