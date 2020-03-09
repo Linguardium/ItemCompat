@@ -31,7 +31,6 @@ public abstract class SheepShearMixin extends AnimalEntity {
 
 	@Inject(at = @At("HEAD"), method = "interactMob", cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
 	private void interactMob(final PlayerEntity player, final Hand hand,final CallbackInfoReturnable<Boolean> info) {
-
 		ItemStack itemStack = player.getStackInHand(hand);
 		if (itemStack.getItem() instanceof ShearsItem || itemStack.getItem().isIn(SHEARS_ITEM)) {
 			if (!this.isSheared() && !this.isBaby()) {
@@ -42,11 +41,7 @@ public abstract class SheepShearMixin extends AnimalEntity {
 					});
 				}
 				info.setReturnValue(true);
-			} else {
-				info.setReturnValue(super.interactMob(player,hand));
 			}
-		}else{
-			info.setReturnValue(false);
 		}
 	}
 }
