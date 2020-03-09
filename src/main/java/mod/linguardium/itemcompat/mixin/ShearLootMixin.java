@@ -34,11 +34,8 @@ public abstract class ShearLootMixin {
 			ItemStack itemStack = (ItemStack) lootContext.get(LootContextParameters.TOOL);
 			if (!itemStack.isEmpty() && (itemStack.getItem() instanceof ShearsItem || itemStack.getItem().isIn(SHEARS_ITEM))) {
 				info.setReturnValue(true);
-				info.cancel();
-				return;
 			}
 		}
-		return;
 	}
 }
 
