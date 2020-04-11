@@ -37,31 +37,33 @@ public abstract class HiveShearMixin extends BlockWithEntity {
 		super(settings);
 	}
 
-	@Inject(at = @At("HEAD"), method = "onUse", cancellable = true)
-	public void onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable info) {
-		ItemStack itemStack = player.getStackInHand(hand);
-		ItemStack itemStack2 = itemStack.copy();
-		int i = BeehiveBlockEntity.getHoneyLevel(state);
-		if (i >= 5) {
-			if (itemStack.getItem() instanceof ShearsItem || itemStack.getItem().isIn(SHEARS_ITEM)) {
-				world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BLOCK_BEEHIVE_SHEAR, SoundCategory.NEUTRAL, 1.0F, 1.0F);
-				BeehiveBlock.dropHoneycomb(world, pos);
-				itemStack.damage(1, player, (playerx) -> {
-					playerx.sendToolBreakStatus(hand);
-				});
-				if (!CampfireBlock.isLitCampfireInRange(world, pos, 5)) {
-					if (this.hasBees(world, pos)) {
-						this.angerNearbyBees(world, pos);
-					}
+	@Inject(at = @At("RETURN"), method = "onUse", cancellable = true)
+	public void onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> info) {
+		if (info.getReturnValue().equals(ActionResult.PASS)) {
+			ItemStack itemStack = player.getStackInHand(hand);
+			ItemStack itemStack2 = itemStack.copy();
+			int i = BeehiveBlockEntity.getHoneyLevel(state);
+			if (i >= 5) {
+				if (itemStack.getItem() instanceof ShearsItem || itemStack.getItem().isIn(SHEARS_ITEM)) {
+					world.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BLOCK_BEEHIVE_SHEAR, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+					BeehiveBlock.dropHoneycomb(world, pos);
+					itemStack.damage(1, player, (playerx) -> {
+						playerx.sendToolBreakStatus(hand);
+					});
+					if (!CampfireBlock.isLitCampfireInRange(world, pos, 5)) {
+						if (this.hasBees(world, pos)) {
+							this.angerNearbyBees(world, pos);
+						}
 
-					this.takeHoney(world, state, pos, player, BeehiveBlockEntity.BeeState.EMERGENCY);
-				} else {
-					this.takeHoney(world, state, pos);
-					if (player instanceof ServerPlayerEntity) {
-						Criterions.SAFELY_HARVEST_HONEY.test((ServerPlayerEntity)player, pos, itemStack2);
+						this.takeHoney(world, state, pos, player, BeehiveBlockEntity.BeeState.EMERGENCY);
+					} else {
+						this.takeHoney(world, state, pos);
+						if (player instanceof ServerPlayerEntity) {
+							Criterions.SAFELY_HARVEST_HONEY.test((ServerPlayerEntity) player, pos, itemStack2);
+						}
 					}
+					info.setReturnValue(ActionResult.SUCCESS);
 				}
-				info.setReturnValue(ActionResult.SUCCESS);
 			}
 		}
 	}

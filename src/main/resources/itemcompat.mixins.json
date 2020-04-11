@@ -6,7 +6,8 @@
   "mixins": [ "ShearLootMixin",
               "HiveShearMixin",
               "SheepShearMixin",
-              "FurnaceMinecartMixin"
+              "FurnaceMinecartMixin",
+              "DispenserMixin"
   ],
   "client": [
   ],

@@ -2,7 +2,6 @@ package mod.linguardium.itemcompat;
 
 import net.fabricmc.api.ModInitializer;
 
-
 public class ItemCompat implements ModInitializer {
 	@Override
 	public void onInitialize() {
@@ -12,5 +11,4 @@ public class ItemCompat implements ModInitializer {
 		ShearsTag.init();
 
 	}
-
 }
